@@ -6,7 +6,7 @@ const About = () => {
       <h1 className="grad-text pt-5 p-3 text-6xl font-extrabold text-center">
         About Us
       </h1>
-      <div className="flex flex-col p-3 lg:flex-row items-center">
+      <div className="flex flex-col px-3 lg:flex-row items-center">
         <article className="flex-1">
           <img src={logo} alt="about-img" />
         </article>
@@ -15,7 +15,7 @@ const About = () => {
           Since our first dish on 12th January 2022, we have grown both in
           stature and repute as the number one Steakhouse in the land. Our
           business model is anchored on getting the best meats to our customers
-          location.
+          location, on time.
         </article>
       </div>
     </section>
