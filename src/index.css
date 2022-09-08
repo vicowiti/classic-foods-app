@@ -2,11 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,
+body::before,
+body::after {
   background: #000;
   color: #fff;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  width: 100vw !important;
+  scroll-behavior: smooth;
+}
+
+.hero {
+  background-image: url("./assets/cover.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+}
+
+.grad-text {
+  background-image: linear-gradient(orange, #fff);
+  background-clip: text;
+  color: transparent;
+}
+
+.grad-text2 {
+  background-image: linear-gradient(#fff, orange);
+  background-clip: text;
+  color: transparent;
 }
