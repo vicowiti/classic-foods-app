@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative w-full">
       <div className="hero opacity-40 h-screen relative "></div>
@@ -9,7 +11,10 @@ const Hero = () => {
           Tasty meals <br /> on the go?
         </h1>
         <p className="lg:text-6xl grad-text2">We got you!</p>
-        <button className="bg-orange-600 px-10 hover:scale-95 duration-700 py-5 mt-5 rounded-full text-lg lg:text-3xl">
+        <button
+          className="bg-orange-600 px-10 hover:scale-95 duration-700 py-5 mt-5 rounded-full text-lg lg:text-3xl"
+          onClick={() => navigate("/menu")}
+        >
           See Menu
         </button>
       </div>
