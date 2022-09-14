@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/menu" element={<Menu />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
