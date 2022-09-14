@@ -26,21 +26,32 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="hidden lg:flex gap-10 text-2xl font-extrabold pr-12">
-        <Link to="/cart" className="hover:text-orange-400 duration-1000">
+        <Link to="/cart" className=" hover:text-orange-400 duration-1000">
           <HiOutlineShoppingBag size={35} />
         </Link>
-        <Link to="/login" className="hover:text-orange-400 duration-1000">
+
+        <Link
+          to="/login"
+          className=" hidden lg:flex hover:text-orange-400 duration-1000"
+        >
           Login
         </Link>
-        <Link to="/register" className="hover:text-orange-400 duration-1000">
+        <Link
+          to="/register"
+          className=" hidden lg:flex  hover:text-orange-400 duration-1000"
+        >
           Sign Up
         </Link>
       </div>
-      <div
-        className=" lg:hidden z-[99999]"
-        onClick={() => setmobileMenu(!mobileMenu)}
-      >
-        {mobileMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+      <div className="flex items-center gap-10 lg:hidden z-[99999]">
+        <div className="block lg:hidden">
+          <Link to="/cart" className=" hover:text-orange-400 duration-1000">
+            <HiOutlineShoppingBag size={35} />
+          </Link>
+        </div>
+        <div onClick={() => setmobileMenu(!mobileMenu)}>
+          {mobileMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+        </div>
       </div>
       {/* //Mobile Slider */}
       <div
