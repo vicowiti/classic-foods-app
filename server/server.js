@@ -11,6 +11,6 @@ connectDb();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/food-ordering/v1/", productHandler);
+app.use("/api/v1/", productHandler);
 
 app.listen(PORT, console.log(`App running on ${PORT}`.bgGreen));

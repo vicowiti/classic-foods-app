@@ -17,9 +17,22 @@ const getProducts = asyncHandler(async (req, res) => {
 
 // Post new Products
 const addProducts = async (req, res) => {
-  res.json({
-    name: "I am the post response",
-  });
+  const { name, price, description, category, imgUrl } = req.body;
+
+  if (name && price && description && category && imgUrl) {
+    const product = await Product.create({
+      name,
+      price,
+      description,
+      category,
+      imgUrl,
+    });
+
+    res.status(201).json(product);
+  } else {
+    res.status(500);
+    throw new Error("Add all required fields");
+  }
 };
 
 // Update a  Product

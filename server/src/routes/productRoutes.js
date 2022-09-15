@@ -12,12 +12,12 @@ const router = express.Router();
 router.get("/products", getProducts);
 
 // Add new Products
-router.post("products", addProducts);
+router.post("/products", addProducts);
 
 // Update a product
-router.put("products/:id", updateProduct);
+router.put("/products/:id", updateProduct);
 
 // Delete a a product
-router.post("products/:id", deleteProduct);
+router.delete("/products/:id", deleteProduct);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  adjective: {
+  imgUrl: {
     type: String,
     required: true,
   },
@@ -20,7 +20,7 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
 });
