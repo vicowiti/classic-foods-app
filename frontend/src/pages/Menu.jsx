@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import meats from "../assets/meats.svg";
 import drinks from "../assets/drinks.svg";
 import vegan from "../assets/vegan.svg";

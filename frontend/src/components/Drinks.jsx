@@ -1,7 +1,13 @@
 import React from "react";
 
-const Drinks = () => {
-  return <div>Drinks</div>;
+const Drinks = ({ data }) => {
+  return (
+    <div>
+      {data.map((item) => (
+        <img src={item.imgUrl} key={item._id} />
+      ))}
+    </div>
+  );
 };
 
 export default Drinks;
