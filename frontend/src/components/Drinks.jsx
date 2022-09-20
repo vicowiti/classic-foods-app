@@ -1,11 +1,10 @@
 import React from "react";
+import RenderItems from "./RenderItems";
 
 const Drinks = ({ data }) => {
   return (
     <div>
-      {data.map((item) => (
-        <img src={item.imgUrl} key={item._id} />
-      ))}
+      <RenderItems name="Drinks 🍸" data={data} />
     </div>
   );
 };

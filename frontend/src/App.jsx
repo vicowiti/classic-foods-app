@@ -17,12 +17,12 @@ import { getProducts, selectAllProducts } from "./features/productsSlice";
 
 const App = () => {
   const dispatch = useDispatch();
-  const myData = useSelector(selectAllProducts);
+  const { data } = useSelector(selectAllProducts);
 
-  const drinks = myData?.data.filter((item) => item.category === "drinks");
-  const meats = myData?.data.filter((item) => item.category === "drinks");
-  const fillet = myData?.data.filter((item) => item.category === "drinks");
-  const vegan = myData?.data.filter((item) => item.category === "drinks");
+  const drinks = data?.filter((item) => item.category === "drinks");
+  const meats = data?.filter((item) => item.category === "meats");
+  const fillet = data?.filter((item) => item.category === "fillet");
+  const vegan = data?.filter((item) => item.category === "vegan");
 
   useEffect(() => {
     dispatch(getProducts());
