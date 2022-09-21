@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { selectCart } from "../features/cartSlice";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [mobileMenu, setmobileMenu] = useState(false);
 
+  const myCart = useSelector(selectCart);
   const onLinkSelect = () => {
     setmobileMenu(false);
   };
@@ -26,8 +30,11 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="hidden lg:flex gap-10 text-2xl font-extrabold pr-12">
-        <Link to="/cart" className=" hover:text-orange-400 duration-1000">
+        <Link to="/cart" className=" duration-1000 relative">
           <HiOutlineShoppingBag size={35} />
+          <p className="bg-orange-400 flex items-center justify-center text-sm rounded-full  w-6 h-6 absolute top-[-5px] right-[-10px]">
+            {myCart.length}
+          </p>
         </Link>
 
         <Link
@@ -45,8 +52,11 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-10 lg:hidden z-[99999]">
         <div className="block lg:hidden">
-          <Link to="/cart" className=" hover:text-orange-400 duration-1000">
+          <Link to="/cart" className="  duration-1000 relative">
             <HiOutlineShoppingBag size={35} />
+            <p className="bg-orange-400 flex items-center justify-center text-sm rounded-full  w-6 h-6 absolute top-[-5px] right-[-10px]">
+              {myCart.length}
+            </p>
           </Link>
         </div>
         <div onClick={() => setmobileMenu(!mobileMenu)}>

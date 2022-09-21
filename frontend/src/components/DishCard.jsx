@@ -1,8 +1,16 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addingToCart } from "../features/cartSlice";
 
 const DishCard = ({ dish }) => {
   const { name, imgUrl, price, description } = dish;
+
+  const dispatch = useDispatch();
+
+  const addToCart = (dishSelected) => {
+    dispatch(addingToCart(dishSelected));
+  };
   return (
     <article className="rounded-2xl  w-screen mb-3 md:mb-12 md:flex gap-5">
       <img
@@ -19,7 +27,10 @@ const DishCard = ({ dish }) => {
         <p className="flex items-center gap-4 text-xl">
           <FaStar color="gold" /> 4.5
         </p>
-        <button className="bg-amber-600 font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg">
+        <button
+          onClick={() => addToCart(dish)}
+          className="bg-amber-600 font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg"
+        >
           Add to Cart
         </button>
       </div>
