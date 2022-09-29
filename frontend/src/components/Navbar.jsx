@@ -11,6 +11,7 @@ const Navbar = () => {
   const [mobileMenu, setmobileMenu] = useState(false);
 
   const myCart = useSelector(selectCart);
+
   const onLinkSelect = () => {
     setmobileMenu(false);
   };
@@ -25,7 +26,7 @@ const Navbar = () => {
         <Link to="/" className="hover:text-orange-400 duration-1000">
           Home
         </Link>
-        <Link to="#about" className="hover:text-orange-400 duration-1000">
+        <Link to="/about" className="hover:text-orange-400 duration-1000">
           About
         </Link>
       </div>
@@ -33,7 +34,7 @@ const Navbar = () => {
         <Link to="/cart" className=" duration-1000 relative">
           <HiOutlineShoppingBag size={35} />
           <p className="bg-orange-400 flex items-center justify-center text-sm rounded-full  w-6 h-6 absolute top-[-5px] right-[-10px]">
-            {myCart.length}
+            {myCart?.length}
           </p>
         </Link>
 
@@ -55,7 +56,7 @@ const Navbar = () => {
           <Link to="/cart" className="  duration-1000 relative">
             <HiOutlineShoppingBag size={35} />
             <p className="bg-orange-400 flex items-center justify-center text-sm rounded-full  w-6 h-6 absolute top-[-5px] right-[-10px]">
-              {myCart.length}
+              {myCart?.length}
             </p>
           </Link>
         </div>
@@ -94,7 +95,7 @@ const Navbar = () => {
           Sign Up
         </Link>
         <a
-          href="#about"
+          href="/about"
           className="hover:text-orange-400 duration-1000"
           onClick={onLinkSelect}
         >
