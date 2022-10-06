@@ -33,27 +33,21 @@ const Register = () => {
         })
       );
 
-      if (user._id) {
-        navigate("/");
-
-        toast.success("Registration Successful!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setName("");
-        setEmail("");
-        setPassword("");
-        setPassword1("");
-        setContact("");
-        console.log("I ran");
-      }
+      setName("");
+      setEmail("");
+      setPassword("");
+      setPassword1("");
+      setContact("");
+      console.log("I ran");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, isError, isPending]);
+
   return (
     <section className="relative w-full">
       <ToastContainer

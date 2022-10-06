@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 import { loginUser, selectAuth } from "../features/authSlice";
 
 const Login = () => {
@@ -23,12 +24,15 @@ const Login = () => {
       );
     }
 
-    if (user?._id) {
-      navigate("/");
-      setEmail("");
-      setPassword("");
-    }
+    setEmail("");
+    setPassword("");
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, isError, isPending]);
 
   return (
     <section className="relative w-full">
@@ -60,6 +64,7 @@ const Login = () => {
           >
             Order
           </button>
+          {isPending && <Spinner />}
         </form>
       </article>
     </section>

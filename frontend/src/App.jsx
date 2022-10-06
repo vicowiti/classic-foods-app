@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, selectAllProducts } from "./features/productsSlice";
 import About from "./components/About";
+import Account from "./pages/Account";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menu/drinks" element={<Drinks data={drinks} />} />
         <Route path="/menu/meats" element={<Meats data={meats} />} />

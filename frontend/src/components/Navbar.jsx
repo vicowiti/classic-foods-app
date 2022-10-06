@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../features/cartSlice";
 import { useEffect } from "react";
+import { logOut, selectAuth } from "../features/authSlice";
 
 const Navbar = () => {
   const [mobileMenu, setmobileMenu] = useState(false);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const myCart = useSelector(selectCart);
+  const { user, isError, isPending } = useSelector(selectAuth);
 
   const onLinkSelect = () => {
     setmobileMenu(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    navigate("/");
   };
   return (
     <nav className="w-full  h-[100px] px-5 flex justify-between  items-center fixed top-0 left-0 z-[999] bg-black/30">
@@ -38,18 +46,31 @@ const Navbar = () => {
           </p>
         </Link>
 
-        <Link
-          to="/login"
-          className=" hidden lg:flex hover:text-orange-400 duration-1000"
-        >
-          Login
-        </Link>
-        <Link
-          to="/register"
-          className=" hidden lg:flex  hover:text-orange-400 duration-1000"
-        >
-          Sign Up
-        </Link>
+        {user?._id ? (
+          <Link to="/account">Account</Link>
+        ) : (
+          <Link
+            to="/login"
+            className=" hidden lg:flex hover:text-orange-400 duration-1000"
+          >
+            Login
+          </Link>
+        )}
+        {user?._id ? (
+          <div
+            className=" hidden lg:flex  hover:text-orange-400 duration-1000"
+            onClick={handleLogout}
+          >
+            Logout
+          </div>
+        ) : (
+          <Link
+            to="/register"
+            className=" hidden lg:flex  hover:text-orange-400 duration-1000"
+          >
+            Sign Up
+          </Link>
+        )}
       </div>
       <div className="flex items-center gap-10 lg:hidden z-[99999]">
         <div className="block lg:hidden">
