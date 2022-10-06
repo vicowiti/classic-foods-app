@@ -68,7 +68,7 @@ const authSlice = createSlice({
     [loginUser.rejected]: (state, { payload }) => {
       state.user = null;
       state.isPending = true;
-      state.isError = false;
+      state.isError = true;
     },
   },
 });
