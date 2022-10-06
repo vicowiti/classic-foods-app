@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
 import { regNewUser, selectAuth } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
@@ -50,19 +49,6 @@ const Register = () => {
 
   return (
     <section className="relative w-full">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        className="z-[100000]"
-      />
-
       <article className="mt-44 mb-32  w-[80vw] rounded-xl flex flex-col justify-center items-center mx-auto">
         <div>
           <h2 className="font-bold text-3xl">Register</h2>

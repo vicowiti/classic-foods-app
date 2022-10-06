@@ -100,21 +100,40 @@ const Navbar = () => {
         >
           Home
         </Link>
-        <Link
-          to="/login"
-          className="hover:text-orange-400 duration-1000"
-          onClick={onLinkSelect}
-        >
-          Login
-        </Link>
+        {user?._id ? (
+          <Link
+            to="/account"
+            className="hover:text-orange-400 duration-1000"
+            onClick={onLinkSelect}
+          >
+            Account
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="hover:text-orange-400 duration-1000"
+            onClick={onLinkSelect}
+          >
+            Login
+          </Link>
+        )}
 
-        <Link
-          to="/register"
-          className="hover:text-orange-400 duration-1000"
-          onClick={onLinkSelect}
-        >
-          Sign Up
-        </Link>
+        {user ? (
+          <div
+            className=" hover:text-orange-400 duration-1000"
+            onClick={handleLogout}
+          >
+            Logout
+          </div>
+        ) : (
+          <Link
+            to="/register"
+            className="hover:text-orange-400 duration-1000"
+            onClick={onLinkSelect}
+          >
+            Sign Up
+          </Link>
+        )}
         <a
           href="/about"
           className="hover:text-orange-400 duration-1000"
