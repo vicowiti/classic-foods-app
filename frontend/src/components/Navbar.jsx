@@ -134,13 +134,13 @@ const Navbar = () => {
             Sign Up
           </Link>
         )}
-        <a
-          href="/about"
+        <Link
+          to="/about"
           className="hover:text-orange-400 duration-1000"
           onClick={onLinkSelect}
         >
           About
-        </a>
+        </Link>
       </div>
     </nav>
   );

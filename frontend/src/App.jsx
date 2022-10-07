@@ -14,8 +14,9 @@ import Menu from "./pages/Menu";
 import Register from "./pages/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, selectAllProducts } from "./features/productsSlice";
-import About from "./components/About";
+
 import Account from "./pages/Account";
+import About from "./pages/About";
 
 const App = () => {
   const dispatch = useDispatch();
