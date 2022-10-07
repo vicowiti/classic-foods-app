@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Drinks from "./components/Drinks";
 import CategoryContent from "./components/Drinks";
 import Fillet from "./components/Fillet";
@@ -45,6 +45,7 @@ const App = () => {
         <Route path="/menu/meats" element={<Meats data={meats} />} />
         <Route path="/menu/vegan" element={<Vegan data={vegan} />} />
         <Route path="/menu/fillet" element={<Fillet data={fillet} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </BrowserRouter>
