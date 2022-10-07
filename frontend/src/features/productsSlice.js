@@ -8,7 +8,9 @@ const initialState = {
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
-    const response = await axios.get("http://localhost:5000/api/v1/products");
+    const response = await axios.get(
+      "http://classic-cuisine.herokuapp.com/api/v1/products"
+    );
 
     return response.data;
   }
