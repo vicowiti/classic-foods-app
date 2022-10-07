@@ -9,7 +9,7 @@ export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
     const response = await axios.get(
-      "http://classic-cuisine.herokuapp.com/api/v1/products"
+      "https://classic-cuisine.herokuapp.com/api/v1/products"
     );
 
     return response.data;
