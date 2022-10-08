@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addingToCart: (state, { payload }) => {
-      const isPresent = state.cart.find((item) => item._id === payload._id);
+      const isPresent = state.cart.find((item) => item?._id === payload?._id);
 
       if (isPresent) {
         state.cart = state.cart.map((item) => {
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     removeItem: (state, { payload }) => {
-      const data = state.cart.filter((item) => item._id != payload);
+      const data = state.cart.filter((item) => item?._id != payload);
       state.cart = data;
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },

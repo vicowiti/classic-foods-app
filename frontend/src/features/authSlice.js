@@ -13,7 +13,7 @@ const initialState = {
 
 export const regNewUser = createAsyncThunk("auth/regNewUser", async (user) => {
   const response = await axios.post(
-    "https://classic-cuisine.herokuapp.com//auth/register",
+    "http://localhost:5000/auth/register",
     user
   );
   localStorage.setItem("user", JSON.stringify(response?.data));
@@ -23,10 +23,7 @@ export const regNewUser = createAsyncThunk("auth/regNewUser", async (user) => {
 
 // Login Logic
 export const loginUser = createAsyncThunk("auth/loginUser", async (user) => {
-  const response = await axios.post(
-    "https://classic-cuisine.herokuapp.com/auth/login",
-    user
-  );
+  const response = await axios.post("http://localhost:5000/auth/login", user);
 
   localStorage.setItem("user", JSON.stringify(response?.data));
 

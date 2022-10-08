@@ -1,12 +1,19 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addingToCart } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addingToCart, selectCart } from "../features/cartSlice";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 
 const DishCard = ({ dish }) => {
   const { name, imgUrl, price, description } = dish;
 
   const dispatch = useDispatch();
+  const data = useSelector(selectCart);
+  const amountInCart = data.map((item) => {
+    if (item?._id === dish?._id) {
+      return item.qty;
+    }
+  });
 
   const addToCart = (dishSelected) => {
     dispatch(addingToCart(dishSelected));
@@ -28,12 +35,24 @@ const DishCard = ({ dish }) => {
           <FaStar color="gold" /> 4.5
         </p>
         {
-          <button
-            onClick={() => addToCart(dish)}
-            className="bg-amber-600 font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
-          >
-            Add to Cart
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => addToCart(dish)}
+              className="bg-amber-600 h-12 flex justify-center items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
+            >
+              Add to Cart
+            </button>
+            <button
+              onClick={() => addToCart(dish)}
+              className="bg-amber-600 h-12  flex justify-between items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
+            >
+              <IoMdArrowDropleft size={40} />
+
+              <p>{amountInCart}</p>
+
+              <IoMdArrowDropright size={40} />
+            </button>
+          </div>
         }
       </div>
       <hr className="block md:hidden" />
