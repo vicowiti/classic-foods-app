@@ -42,16 +42,18 @@ const DishCard = ({ dish }) => {
             >
               Add to Cart
             </button>
-            <button
-              onClick={() => addToCart(dish)}
-              className="bg-amber-600 h-12  flex justify-between items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
-            >
-              <IoMdArrowDropleft size={40} />
+            {amountInCart[0] && (
+              <button
+                onClick={() => addToCart(dish)}
+                className="bg-amber-600 h-12  flex justify-between items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
+              >
+                <IoMdArrowDropleft size={40} />
 
-              <p>{amountInCart}</p>
+                <p>{amountInCart[0]}</p>
 
-              <IoMdArrowDropright size={40} />
-            </button>
+                <IoMdArrowDropright size={40} />
+              </button>
+            )}
           </div>
         }
       </div>

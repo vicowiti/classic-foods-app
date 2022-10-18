@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getAccessToken,
   registerUrls,
+  setStk,
 } = require("../controllers/paymentController");
 const mpesaMiddleware = require("../middleware/mpesaMiddleware");
 
@@ -11,5 +12,7 @@ const Router = express.Router();
 Router.get("/access_token", mpesaMiddleware, getAccessToken);
 
 Router.get("/register", mpesaMiddleware, registerUrls);
+
+Router.get("/stk", mpesaMiddleware, setStk);
 
 module.exports = Router;
