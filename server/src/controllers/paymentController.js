@@ -2,7 +2,10 @@ const axios = require("axios");
 const unirest = require("unirest");
 const { config } = require("dotenv");
 const AsyncHandler = require("express-async-handler");
-const datetime = require("datetime");
+const timeStamp = require("../middleware/timestamp");
+
+// Env vars
+const endpoint = process.env.endpoint;
 
 // Generates an access token that is valid for an hour
 const getAccessToken = AsyncHandler(async (req, res) => {
@@ -40,43 +43,22 @@ const registerUrls = AsyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
-const setStk = AsyncHandler((req, res) => {
-  const endpoint =
-    "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
-
+const setStk = AsyncHandler(async (req, res) => {
   const { accessToken } = req.body;
   let auth = "Bearer " + accessToken;
-  let dateNow = new Date();
-
-  const timeStamp =
-    dateNow.getFullYear() +
-    "" +
-    (dateNow.getMonth() + 1) +
-    "" +
-    dateNow.getDate() +
-    "" +
-    dateNow.getHours() +
-    "" +
-    dateNow.getMinutes() +
-    "" +
-    dateNow.getSeconds();
 
   const password = new Buffer.from(
     "5028763" +
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" +
-      timeStamp
+      timeStamp()
   ).toString("base64");
 
-  let request = unirest(
-    "POST",
-    "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-  )
-    .headers({
-      "Content-Type": "application/json",
-      Authorization: auth,
-    })
-    .send(
-      JSON.stringify({
+  console.log(password);
+  try {
+    const { data } = await axios.post(
+      "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+
+      {
         BusinessShortCode: 174379,
         Password: password,
         Timestamp: timeStamp,
@@ -88,12 +70,19 @@ const setStk = AsyncHandler((req, res) => {
         CallBackURL: "https://mydomain.com/path",
         AccountReference: "CompanyXLTD",
         TransactionDesc: "Payment of X",
-      })
-    )
-    .end((res) => {
-      if (res.error) throw new Error(res.error);
-      console.log(res.raw_body);
-    });
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth,
+        },
+      }
+    );
+
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 module.exports = {
@@ -101,30 +90,3 @@ module.exports = {
   registerUrls,
   setStk,
 };
-
-/*
-
-let req = unirest('POST', 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest')
-.headers({
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer SxPBDtOsSb2pSwUF39luoT2A2DTl'
-})
-.send(JSON.stringify({
-    "BusinessShortCode": 5028763,
-    "Password": ,
-    "Timestamp": ,
-    "TransactionType": "CustomerBuyGoodsOnline",
-    "Amount": 1,
-    "PartyA": 254794181582,
-    "PartyB": 5028763,
-    "PhoneNumber": 254794181582,
-    "CallBackURL": "https://mydomain.com/path",
-    "AccountReference": "CompanyXLTD",
-    "TransactionDesc": "Payment of X" 
-  }))
-.end(res => {
-    if (res.error) throw new Error(res.error);
-    res.status(200).json(res.raw_body);
-});
-
-*/

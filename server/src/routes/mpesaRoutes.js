@@ -13,6 +13,6 @@ Router.get("/access_token", mpesaMiddleware, getAccessToken);
 
 Router.get("/register", mpesaMiddleware, registerUrls);
 
-Router.get("/stk", mpesaMiddleware, setStk);
+Router.post("/stk", mpesaMiddleware, setStk);
 
 module.exports = Router;
