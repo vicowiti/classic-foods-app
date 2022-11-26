@@ -18,13 +18,13 @@ const cartSlice = createSlice({
           if (item._id === payload._id) {
             return {
               ...item,
-              qty: item.qty + 1,
+              qty: payload.qty,
             };
           }
         });
         localStorage.setItem("cart", JSON.stringify(state.cart));
       } else {
-        state.cart.push({ ...payload, qty: 1 });
+        state.cart.push({ ...payload });
         localStorage.setItem("cart", JSON.stringify(state.cart));
       }
 

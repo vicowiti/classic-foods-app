@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addingToCart, selectCart } from "../features/cartSlice";
-import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 const DishCard = ({ dish }) => {
   const { name, imgUrl, price, description } = dish;
@@ -15,9 +15,22 @@ const DishCard = ({ dish }) => {
     }
   });
 
+  const [quantity, setQuantity] = useState(amountInCart > 0 ? amountInCart : 0);
+
   const addToCart = (dishSelected) => {
-    dispatch(addingToCart(dishSelected));
+    dispatch(addingToCart({ ...dishSelected, qty: quantity }));
   };
+
+  const addQty = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const removeQty = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <article className="rounded-2xl  w-screen mb-3 md:mb-12 md:flex gap-5">
       <img
@@ -36,22 +49,25 @@ const DishCard = ({ dish }) => {
         </p>
         {
           <div className="flex gap-4">
-            <button
-              onClick={() => addToCart(dish)}
-              className="bg-amber-600 h-12 flex justify-center items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
-            >
-              Add to Cart
-            </button>
-            {amountInCart[0] && (
+            {
+              <button className="bg-amber-600 h-12  flex justify-between items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg">
+                <AiOutlineMinusCircle
+                  size={30}
+                  className="text-white"
+                  onClick={removeQty}
+                />
+
+                <p className="px-2">{quantity}</p>
+
+                <AiOutlinePlusCircle size={30} onClick={addQty} />
+              </button>
+            }
+            {quantity > 0 && (
               <button
                 onClick={() => addToCart(dish)}
-                className="bg-amber-600 h-12  flex justify-between items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
+                className="bg-amber-600 h-12 flex justify-center items-center font-semibold md:text-2xl px-2  md:p-5 my-4 rounded-lg hover:scale-90 duration-300"
               >
-                <IoMdArrowDropleft size={40} />
-
-                <p>{amountInCart[0]}</p>
-
-                <IoMdArrowDropright size={40} />
+                Add to Cart
               </button>
             )}
           </div>

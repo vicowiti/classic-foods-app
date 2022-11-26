@@ -48,7 +48,7 @@ const setStk = AsyncHandler(async (req, res) => {
   let auth = "Bearer " + accessToken;
 
   const password = new Buffer.from(
-    "5028763" +
+    process.env.shortcode +
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" +
       timeStamp()
   ).toString("base64");
@@ -59,13 +59,13 @@ const setStk = AsyncHandler(async (req, res) => {
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
 
       {
-        BusinessShortCode: 174379,
+        BusinessShortCode: parseInt(process.env.shortcode),
         Password: password,
-        Timestamp: timeStamp,
-        TransactionType: "CustomerPayBillOnline",
+        Timestamp: timeStamp(),
+        TransactionType: "CustomerBuyGoodsOnline",
         Amount: 1,
         PartyA: 254794181582,
-        PartyB: 174379,
+        PartyB: parseInt(process.env.shortcode),
         PhoneNumber: 254794181582,
         CallBackURL: "https://mydomain.com/path",
         AccountReference: "CompanyXLTD",
